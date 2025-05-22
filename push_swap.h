@@ -18,6 +18,24 @@ typedef struct s_stack
     int     size;
 }               t_stack;
 
+typedef struct s_index
+{
+    int start;
+    int end;
+}               t_index;
+
+typedef struct s_obj
+{
+    int value;
+    int path;
+}              t_obj;
+
+typedef struct s_unmarked
+{
+    int *unmarked_nums;
+    int unmarked_size;
+}              t_unmarked;
+
 int     ft_strlen(char *str);
 int     is_space(char c);
 int     ft_split_needed(int ac, char *av[]);
@@ -47,11 +65,19 @@ void    rrb(t_stack *stack_b);
 void    rrr(t_stack *stack_a, t_stack *stack_b);
 void    pb(t_stack *stack_b, t_stack *stack_a);
 void    pa(t_stack *stack_b, t_stack *stack_a);
+void    sort_two(t_stack *stack);
+void    sort_three(t_stack *stack);
+void    get_arr_min_check_rotate_push(t_stack *stack_a, t_stack *stack_b, int *arr);
+void    easy_push_swap(t_stack *stack_a, t_stack *stack_b);
+void    push_swap(t_stack *stack_a, t_stack *stack_b);
 int     *creat_array_from_stack(t_stack *stack_a, int *arr);
 int    *stack_mapping_arr_ord(t_stack *stack_a);
-int    *stack_mapping_arr_asc(t_stack *stack_a);
+int    *stack_mapping_arr_flags(t_stack *stack_a);
 int     *get_longest_increasing_nums(int *arr, int size);
-void    get_sort_arr(t_stack *stack_a, int *arr);
-void    push_swap(t_stack *stack_a, t_stack *stack_b);
+void    get_sort_arr(int size, int *arr);
+int     find_sqrt(int size);
+void    push_swap_algo(t_stack *stack_a, t_stack *stack_b, int *arr_asc, t_unmarked *unmarked_nbs);
+void    find_obj_node_pos(t_stack *stack_a, int *arr_asc, t_index times, int *pos_obj);
+t_obj   find_shorter_path_rotate(int *arr_asc, t_unmarked *unmarked_nbs, int *pos_obj, t_index times);
 
 #endif

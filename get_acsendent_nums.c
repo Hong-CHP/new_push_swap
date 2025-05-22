@@ -1,17 +1,6 @@
 #include "push_swap.h"
 
-// void    print_flag(int *arr, int size)
-// {
-//     int i = 0;
-//     while (i < size)
-//     {
-//         printf("%d = %d ,", i, arr[i]);
-//         i++;
-//     }
-//     printf("\n");
-// }
-
-int *recup_flags(int *arr, int size, int best_end, int *prev)
+int *recup_flags(int size, int best_end, int *prev)
 {
     int  *flags;
     int     p;
@@ -84,49 +73,9 @@ int *get_longest_increasing_nums(int *arr, int size)
         i++;
     }
     best_end = fill_dp_and_prev(arr, size, dp, prev);
-    flags = recup_flags(arr, size, best_end, prev);
+    flags = recup_flags(size, best_end, prev);
     free(dp);
     free(prev);
     return (flags);
 }
 
-/* 返回 flags[i] = 1 表示 arr[i] 在最终选定的 LIS 内 */
-// int *get_longest_increasing_nums(int *arr, int size)
-// {
-//     int     i;
-//     int     j;
-//     int  *dp;
-//     int  *prev;
-//     int   *flag;
-//     int   max_len = 1;
-//     int   best_end = 0;
-
-//     init_dp_and_prev(&dp, &prev, size);
-//     i = 1;
-//     while (i < size)
-//     {
-//         j = 0; 
-//         while (j < i)
-//         {
-//             if (arr[i] > arr[j] && (dp[j] + 1 > dp[i] ||
-//                     (dp[j] + 1 == dp[i] && arr[j] < arr[prev[i]])))
-//             {
-//                 dp[i] = dp[j] + 1;
-//                 prev[i] = j;
-//             }
-//             j++;
-//         }
-//         if (dp[i] > max_len ||
-//                 (dp[i] == max_len && arr[i] < arr[best_end]))
-//         {
-//             max_len = dp[i];
-//             best_end = i;
-//         }
-//         i++;
-//     }
-//     flag = recup_flags(arr, size, best_end, prev);
-//     free(dp);
-//     free(prev);
-//     print_flag(flag, size);
-//     return (flag);
-// }

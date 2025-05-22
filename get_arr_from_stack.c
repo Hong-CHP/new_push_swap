@@ -27,13 +27,12 @@ int    *stack_mapping_arr_ord(t_stack *stack_a)
     return (arr);
 }
 
-int    *stack_mapping_arr_asc(t_stack *stack_a)
+int    *stack_mapping_arr_flags(t_stack *stack_a)
 {
     int *arr;
     // (need to be free ar the last of func if arr_asc created and freed)
     int *flags;
     //(malloc in get_longest_increasing_nums, need to be free at last of program)
-    int i;
     
     arr = malloc(sizeof(int) * stack_a->size);
     if (!arr)
@@ -44,17 +43,17 @@ int    *stack_mapping_arr_asc(t_stack *stack_a)
     return (flags);
 }
 
-void    get_sort_arr(t_stack *stack_a, int *arr)
+void    get_sort_arr(int size, int *arr)
 {
     int temp;
     int i;
     int j;
 
     i = 0;
-    while (i < stack_a->size - 1)
+    while (i < size - 1)
     {
         j = i + 1;
-        while (j < stack_a->size)
+        while (j < size)
         {
             if (arr[i] > arr[j])
             {
@@ -66,4 +65,21 @@ void    get_sort_arr(t_stack *stack_a, int *arr)
         }
         i++;
     }
+}
+
+int find_sqrt(int size)
+{
+    int sqrt;
+
+    sqrt = 0;
+    while (sqrt * sqrt <= size)
+    {
+        if (sqrt * sqrt == size)
+            return (sqrt);
+        sqrt++;
+    }
+    if (sqrt * sqrt > size && (sqrt - 1) * (sqrt - 1) < size)
+        return (sqrt - 1);
+    else
+        return (0);
 }
