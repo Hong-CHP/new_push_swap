@@ -76,8 +76,12 @@ int    *stack_mapping_arr_flags(t_stack *stack_a);
 int     *get_longest_increasing_nums(int *arr, int size);
 void    get_sort_arr(int size, int *arr);
 int     find_sqrt(int size);
+int     get_real_pos(t_stack *stack_a, int num);
+int     get_bottom_val(t_stack *stack);
+int     is_obj_unmarked(t_unmarked *unmarked_nbs, int val);
+void    remove_unmarked_value(t_unmarked *unmarked_nbs, int val);
 void    push_swap_algo(t_stack *stack_a, t_stack *stack_b, int *arr_asc, t_unmarked *unmarked_nbs);
-void    find_obj_node_pos(t_stack *stack_a, int *arr_asc, t_index times, int *pos_obj);
+void    find_obj_node_pos(t_stack *stack_a, int *arr_asc, t_index times, t_unmarked *unmarked_nbs, int *pos_obj);
 t_obj   find_shorter_path_rotate(int *arr_asc, t_unmarked *unmarked_nbs, int *pos_obj, t_index times);
 
 #endif

@@ -22,6 +22,25 @@
 //     printf("\n");
 // }
 
+// void    remove_unmarked_value(t_unmarked *unmarked_nbs, int val)
+// {
+//     int i = 0;
+//     while (i < unmarked_nbs->unmarked_size)
+//     {
+//         if (unmarked_nbs->unmarked_nums[i] == val)
+//         {
+//             while (i < unmarked_nbs->unmarked_size - 1)
+//             {
+//                 unmarked_nbs->unmarked_nums[i] = unmarked_nbs->unmarked_nums[i + 1];
+//                 i++;
+//             }
+//             unmarked_nbs->unmarked_size--;
+//             return;
+//         }
+//         i++;
+//     }
+// }
+
 /* 返回 flags[i] = 1 表示 arr[i] 在最终选定的 LIS 内 */
 // int *get_longest_increasing_nums(int *arr, int size)
 // {

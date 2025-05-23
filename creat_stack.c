@@ -92,11 +92,11 @@ void	get_value_init_stack(int argc, char *argv[])
         push_swap(&stack_a, &stack_b);
     // if (stack_a.size >= 3 && stack_b.size > 0)
     //     back_to_a(&stack_a, &stack_b);
-    //ft_print_stack(&stack_a);
-    // if (stack_b.size != 0)
-    //     ft_print_stack(&stack_b);
-    // else
-    //     printf("NULL\n");
+    ft_print_stack(&stack_a);
+    if (stack_b.size != 0)
+        ft_print_stack(&stack_b);
+    else
+        printf("NULL\n");
     ft_free_stack(&stack_a);
     ft_free_stack(&stack_b);
 }

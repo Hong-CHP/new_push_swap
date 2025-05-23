@@ -83,7 +83,7 @@ void    push_swap(t_stack *stack_a, t_stack *stack_b)
 {
     int *flags;
     //(malloc in get_longest_increasing_nums, need to be free at last of program)
-    int *arr_asc;
+    int *arr_dsc;
     //(malloc in stack_mapping_arr_ord, need to be free)
     int *arr_ord;
     //(malloc in stack_mapping_arr_ord, need to be free)
@@ -91,16 +91,16 @@ void    push_swap(t_stack *stack_a, t_stack *stack_b)
     //(malloc in func, need to be free)
 
     arr_ord = stack_mapping_arr_ord(stack_a);
-    arr_asc = stack_mapping_arr_ord(stack_a);
-    get_sort_arr(stack_a->size, arr_asc);
+    arr_dsc = stack_mapping_arr_ord(stack_a);
+    get_sort_arr(stack_a->size, arr_dsc);
     print_arr(arr_ord, stack_a->size);
-    print_arr(arr_asc, stack_a->size);
+    print_arr(arr_dsc, stack_a->size);
     flags = stack_mapping_arr_flags(stack_a);
     unmarked_nbs = allocate_and_fill_unmarked(flags, arr_ord, stack_a->size);
-    push_swap_algo(stack_a, stack_b, arr_asc, unmarked_nbs);
+    push_swap_algo(stack_a, stack_b, arr_dsc, unmarked_nbs);
     free(flags);
     free(arr_ord);
-    free(arr_asc);
+    free(arr_dsc);
     free(unmarked_nbs->unmarked_nums);
     free(unmarked_nbs);
 }
