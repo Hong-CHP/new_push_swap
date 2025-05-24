@@ -98,6 +98,7 @@ void    push_swap(t_stack *stack_a, t_stack *stack_b)
     flags = stack_mapping_arr_flags(stack_a);
     unmarked_nbs = allocate_and_fill_unmarked(flags, arr_ord, stack_a->size);
     push_swap_algo(stack_a, stack_b, arr_dsc, unmarked_nbs);
+    get_val_in_b(stack_a, stack_b);
     free(flags);
     free(arr_ord);
     free(arr_dsc);

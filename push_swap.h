@@ -79,9 +79,10 @@ int     find_sqrt(int size);
 int     get_real_pos(t_stack *stack_a, int num);
 int     get_bottom_val(t_stack *stack);
 int     is_obj_unmarked(t_unmarked *unmarked_nbs, int val);
-void    remove_unmarked_value(t_unmarked *unmarked_nbs, int val);
+//void    remove_unmarked_value(t_unmarked *unmarked_nbs, int val);
 void    push_swap_algo(t_stack *stack_a, t_stack *stack_b, int *arr_asc, t_unmarked *unmarked_nbs);
 void    find_obj_node_pos(t_stack *stack_a, int *arr_asc, t_index times, t_unmarked *unmarked_nbs, int *pos_obj);
 t_obj   find_shorter_path_rotate(int *arr_asc, t_unmarked *unmarked_nbs, int *pos_obj, t_index times);
+void    get_val_in_b(t_stack *stack_a, t_stack *stack_b);
 
 #endif
