@@ -84,5 +84,7 @@ void    push_swap_algo(t_stack *stack_a, t_stack *stack_b, int *arr_asc, t_unmar
 void    find_obj_node_pos(t_stack *stack_a, int *arr_asc, t_index times, t_unmarked *unmarked_nbs, int *pos_obj);
 t_obj   find_shorter_path_rotate(int *arr_asc, t_unmarked *unmarked_nbs, int *pos_obj, t_index times);
 void    get_val_in_b(t_stack *stack_a, t_stack *stack_b);
-
+int    find_pos_in_b(t_stack *stack_b, int pos);
+int    find_val_insert_place(t_stack *stack_a, int val);
+int    solve_two_exp_case(t_stack *stack_a, int val);
 #endif
