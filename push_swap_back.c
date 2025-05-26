@@ -26,6 +26,8 @@ void    push_swap_back(t_stack *stack_a, t_stack *stack_b, t_unmarked *unmarked_
     int *path;
 //malloc need to be free after used
     push_swap_for_lasts_unmarked(stack_a, stack_b, unmarked_nbs);
+    // ft_print_stack(stack_a);
+    // ft_print_stack(stack_b);
     while (stack_b->size > 0)
     {
         path = get_val_in_b(stack_a, stack_b);
@@ -35,6 +37,10 @@ void    push_swap_back(t_stack *stack_a, t_stack *stack_b, t_unmarked *unmarked_
         if (insert_pos == -1)
             insert_pos = solve_two_exp_case(stack_a, val);
         real_pos = get_real_pos(stack_b, val);
+        // print_arr(path, stack_b->size);
+        // printf("insert val is %d\n", val);
+        // printf("insert_pos is %d\n", insert_pos);
+        // printf("real pos is %d\n", real_pos);
         if (insert_pos <= (stack_a->size + 1) / 2)
         {
             if (real_pos == 1 && insert_pos != 1)
@@ -64,14 +70,14 @@ void    push_swap_back(t_stack *stack_a, t_stack *stack_b, t_unmarked *unmarked_
                 }
                 else
                 {
-                    while (*(stack_b->top->value) != val)
+                    while (insert_pos - 1 != 0) 
                     {
                         rr(stack_a, stack_b);
                         insert_pos--;
                     }
-                    while (insert_pos - 1 != 0)
+                    while (*(stack_b->top->value) != val)
                     {
-                        ra(stack_a);
+                        rb(stack_b);
                         insert_pos--;
                     }
 
@@ -108,6 +114,8 @@ void    push_swap_back(t_stack *stack_a, t_stack *stack_b, t_unmarked *unmarked_
         }
         else
         {
+            if (real_pos == 1 && stack_a->size - insert_pos + 1 == 0)
+                rra(stack_a);
             if (real_pos == 1 && stack_a->size - insert_pos + 1 != 0)
             {
                 while (stack_a->size - insert_pos + 1 != 0)

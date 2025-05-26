@@ -24,6 +24,12 @@ void update_max_lis(int *dp, int i, int *max_len, int *best_end)
     *best_end = i;
 }
 
+void should_update(int *dp, int *prev, int i, int j)
+{
+    dp[i] = dp[j] + 1;
+    prev[i] = j;
+}
+
 int fill_dp_and_prev(int *arr, int size, int *dp, int *prev)
 {
     int i;
@@ -33,6 +39,7 @@ int fill_dp_and_prev(int *arr, int size, int *dp, int *prev)
 
     i = 1;
     max_len = 1;
+    best_end = 0;
     while (i < size)
     {
         j = 0;
@@ -40,10 +47,7 @@ int fill_dp_and_prev(int *arr, int size, int *dp, int *prev)
         {
             if (arr[i] > arr[j] && (dp[j] + 1 > dp[i] ||
                 (dp[j] + 1 == dp[i] && arr[j] < arr[prev[i]])))
-            {
-                dp[i] = dp[j] + 1;
-                prev[i] = j;
-            }
+                should_update(dp, prev, i, j);
             j++;
         }
         if (dp[i] > max_len || (dp[i] == max_len && arr[i] < arr[best_end]))
@@ -74,6 +78,7 @@ int *get_longest_increasing_nums(int *arr, int size)
     }
     best_end = fill_dp_and_prev(arr, size, dp, prev);
     flags = recup_flags(size, best_end, prev);
+    // print_arr(flags, size);
     free(dp);
     free(prev);
     return (flags);

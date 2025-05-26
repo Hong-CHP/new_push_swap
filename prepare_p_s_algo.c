@@ -46,7 +46,6 @@ t_unmarked  *find_unmarked_nums_sort(t_unmarked *unmarked_nbs, int *flags, int *
     }
     unmarked_nbs->unmarked_size = j;
     get_sort_arr(j, unmarked_nbs->unmarked_nums);
-    // print_arr(unmarked_nbs->unmarked_nums, j);
     return (unmarked_nbs);
 }
 
@@ -57,12 +56,12 @@ t_unmarked  *allocate_and_fill_unmarked(int *flags, int *arr_ord, int size)
 
     unmarked_nbs = malloc(sizeof(t_unmarked));
     if (!unmarked_nbs)
-        return (0);
-        unmarked_nbs->unmarked_nums = malloc(sizeof(int) * size);
+        return (NULL);
+    unmarked_nbs->unmarked_nums = malloc(sizeof(int) * size);
     if (!unmarked_nbs->unmarked_nums)
     {
         free(unmarked_nbs);
-        return NULL;
+        return (NULL);
     }
     find_unmarked_nums_sort(unmarked_nbs, flags, arr_ord, size);
     return (unmarked_nbs);
@@ -82,10 +81,11 @@ void    push_swap(t_stack *stack_a, t_stack *stack_b)
     arr_ord = stack_mapping_arr_ord(stack_a);
     arr_asc = stack_mapping_arr_ord(stack_a);
     get_sort_arr(stack_a->size, arr_asc);
-    // print_arr(arr_ord, stack_a->size);
-    // print_arr(arr_asc, stack_a->size);
+    print_arr(arr_ord, stack_a->size);
+    print_arr(arr_asc, stack_a->size);
     flags = stack_mapping_arr_flags(stack_a);
     unmarked_nbs = allocate_and_fill_unmarked(flags, arr_ord, stack_a->size);
+    print_arr(unmarked_nbs->unmarked_nums, unmarked_nbs->unmarked_size);
     push_swap_algo(stack_a, stack_b, arr_asc, unmarked_nbs);
     push_swap_back(stack_a, stack_b, unmarked_nbs);
     free(flags);
