@@ -37,6 +37,7 @@ int find_shortest_from_mins(int *mins_path, int size)
     }
     i = 1;
     min = mins_path[0];
+    min_index = 0;
     while (i < size)
     {
         if (min > mins_path[i])
@@ -44,7 +45,6 @@ int find_shortest_from_mins(int *mins_path, int size)
             min = mins_path[i];
             min_index = i;
         }
-        min_index = 0;
         i++;
     }
     return (min_index);
@@ -69,7 +69,6 @@ void    simple_rotate(t_stack *stack_a, int val)
     {
         while (*(stack_a->top->value) != val)
             ra(stack_a);
-
     }
     else
         while (*(stack_a->top->value) != val)

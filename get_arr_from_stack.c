@@ -55,7 +55,7 @@ void    get_sort_arr(int size, int *arr)
         j = i + 1;
         while (j < size)
         {
-            if (arr[i] < arr[j])
+            if (arr[i] > arr[j])
             {
                 temp = arr[i];
                 arr[i] = arr[j];

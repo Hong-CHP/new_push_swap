@@ -54,7 +54,7 @@ void    find_obj_node_pos(t_stack *stack_a, int *arr_asc, t_index times, t_unmar
         times.start++;
         index++;
     }
-    printf("pos_obj are : %d, %d, %d, %d\n", pos_obj[0], pos_obj[1], pos_obj[2], pos_obj[3]);
+    // printf("pos_obj are : %d, %d, %d, %d\n", pos_obj[0], pos_obj[1], pos_obj[2], pos_obj[3]);
 }
 
 
@@ -87,7 +87,7 @@ t_obj find_shorter_path_rotate(int *arr_asc, t_unmarked *unmarked_nbs, int *pos_
     obj.value = arr_asc[shortest_index + times.start];
     //obj.path = pos[0]
     //obj.value = arr_asc[0 + 0]
-    printf("shortest value is %d, shortest path is %d\n", obj.value, obj.path);
+    // printf("shortest value is %d, shortest path is %d\n", obj.value, obj.path);
     return obj;
 }
 

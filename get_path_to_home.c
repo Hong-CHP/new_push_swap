@@ -15,7 +15,7 @@ int     get_short_path_one(t_stack *stack_a, t_stack *stack_b, t_node *cur, int 
     
     real_pos = get_real_pos(stack_b, *(cur->value));
     pos = find_pos_in_b(stack_b, real_pos);
-    if (real_pos == 1)
+    if (real_pos == 1 && insert_pos != 1)
         return (insert_pos - 1);
     if (insert_pos == 1)
         return (pos);
@@ -42,7 +42,7 @@ int     get_short_path_two(t_stack *stack_a, t_stack *stack_b, t_node *cur, int 
 
     real_pos = get_real_pos(stack_b, *(cur->value));
     pos = find_pos_in_b(stack_b, real_pos);
-    if (real_pos == 1)
+    if (real_pos == 1 && stack_a->size - insert_pos + 1 != 0)
         return (stack_a->size - insert_pos + 1);
     if (real_pos <= (stack_b->size + 1) / 2)
     {
@@ -60,7 +60,7 @@ int     get_short_path_two(t_stack *stack_a, t_stack *stack_b, t_node *cur, int 
     }
 }
 
-void    get_val_in_b(t_stack *stack_a, t_stack *stack_b)
+int    *get_val_in_b(t_stack *stack_a, t_stack *stack_b)
 {
     t_node *cur;
     int     insert_pos;
@@ -70,7 +70,7 @@ void    get_val_in_b(t_stack *stack_a, t_stack *stack_b)
 
     path = malloc(sizeof(int) * stack_b->size);
     if (!path)
-        return ;
+        return (NULL);
     cur = stack_b->top;
     i = 0;
     while (cur)
@@ -83,9 +83,8 @@ void    get_val_in_b(t_stack *stack_a, t_stack *stack_b)
             path[i] = get_short_path_one(stack_a, stack_b, cur, insert_pos);
         else
             path[i] = get_short_path_two(stack_a, stack_b, cur, insert_pos);
-        printf("path is %d\n", path[i]);
-        printf("\n");
         i++;
         cur = cur->next;
     }
+    return (path);
 }

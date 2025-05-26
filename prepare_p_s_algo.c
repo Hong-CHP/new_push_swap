@@ -1,16 +1,5 @@
 #include "push_swap.h"
 
-void    print_arr(int *arr, int size)
-{
-    int i = 0;
-    while (i < size)
-    {
-        printf("%d, ", arr[i]);
-        i++;
-    }
-    printf("\n");
-}
-
 void    sort_less_than_seven(t_stack *stack_a, t_stack *stack_b)
 {
     int *arr;
@@ -57,7 +46,7 @@ t_unmarked  *find_unmarked_nums_sort(t_unmarked *unmarked_nbs, int *flags, int *
     }
     unmarked_nbs->unmarked_size = j;
     get_sort_arr(j, unmarked_nbs->unmarked_nums);
-    print_arr(unmarked_nbs->unmarked_nums, j);
+    // print_arr(unmarked_nbs->unmarked_nums, j);
     return (unmarked_nbs);
 }
 
@@ -83,7 +72,7 @@ void    push_swap(t_stack *stack_a, t_stack *stack_b)
 {
     int *flags;
     //(malloc in get_longest_increasing_nums, need to be free at last of program)
-    int *arr_dsc;
+    int *arr_asc;
     //(malloc in stack_mapping_arr_ord, need to be free)
     int *arr_ord;
     //(malloc in stack_mapping_arr_ord, need to be free)
@@ -91,17 +80,17 @@ void    push_swap(t_stack *stack_a, t_stack *stack_b)
     //(malloc in func, need to be free)
 
     arr_ord = stack_mapping_arr_ord(stack_a);
-    arr_dsc = stack_mapping_arr_ord(stack_a);
-    get_sort_arr(stack_a->size, arr_dsc);
-    print_arr(arr_ord, stack_a->size);
-    print_arr(arr_dsc, stack_a->size);
+    arr_asc = stack_mapping_arr_ord(stack_a);
+    get_sort_arr(stack_a->size, arr_asc);
+    // print_arr(arr_ord, stack_a->size);
+    // print_arr(arr_asc, stack_a->size);
     flags = stack_mapping_arr_flags(stack_a);
     unmarked_nbs = allocate_and_fill_unmarked(flags, arr_ord, stack_a->size);
-    push_swap_algo(stack_a, stack_b, arr_dsc, unmarked_nbs);
-    get_val_in_b(stack_a, stack_b);
+    push_swap_algo(stack_a, stack_b, arr_asc, unmarked_nbs);
+    push_swap_back(stack_a, stack_b, unmarked_nbs);
     free(flags);
     free(arr_ord);
-    free(arr_dsc);
+    free(arr_asc);
     free(unmarked_nbs->unmarked_nums);
     free(unmarked_nbs);
 }

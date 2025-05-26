@@ -27,11 +27,12 @@ void    check_b_before_move(t_stack *stack_a, t_stack *stack_b)
         b_bottom = get_bottom_val(stack_b);
     if (stack_a->size > 2)
         a_bottom = get_bottom_val(stack_a);
-    if (stack_b->size >= 2 && *(stack_b->top->value) < *(stack_b->top->next->value))
+    if (stack_b->size >= 2 && *(stack_b->top->value) < *(stack_b->top->next->value)
+        && *(stack_b->top->value) > b_bottom)
     {
-        if (*(stack_b->top->value) < b_bottom)
-            rb(stack_b);
-        else if (*(stack_a->top->value) > *(stack_a->top->next->value))
+        // if (*(stack_b->top->value) < b_bottom)
+        //     rb(stack_b);
+        if (*(stack_a->top->value) > *(stack_a->top->next->value))
             ss(stack_a, stack_b);
         else
             sb(stack_b);
@@ -88,6 +89,19 @@ void    swap_rotate_shortest_to_top(t_stack *stack_a, t_stack *stack_b, t_obj *s
     pb(stack_a, stack_b);
 }
 
+int    *init_val_push_swap_algo(int sqrt, t_index *times, int index)
+{
+    int *pos_obj;
+
+    pos_obj = malloc(sizeof(int) * sqrt);
+    if (!pos_obj)
+        return (NULL);
+    ft_bzero(pos_obj, sqrt);
+    times->start = index * sqrt;
+    times->end = times->start + sqrt;
+    return (pos_obj);
+}
+
 void    push_swap_algo(t_stack *stack_a, t_stack *stack_b, int *arr_asc, t_unmarked *unmarked_nbs)
 {
     int i;
@@ -101,15 +115,10 @@ void    push_swap_algo(t_stack *stack_a, t_stack *stack_b, int *arr_asc, t_unmar
     i = 0;
     while (i <= sqrt)
     {
-        pos_obj = malloc(sizeof(int) * sqrt);
-        if (!pos_obj)
-            return ;
-        ft_bzero(pos_obj, sqrt);
+        pos_obj = init_val_push_swap_algo(sqrt, &times, i);
         k = i * sqrt;
-        times.start = i * sqrt;
-        times.end = times.start + sqrt;
-        printf("\n-----------------------------------------------\n");
-        printf("[%d] sqrt: ", i);
+        // printf("\n-----------------------------------------------\n");
+        // printf("[%d] sqrt: ", i);
         while (k < times.end)
         {
             find_obj_node_pos(stack_a, arr_asc, times, unmarked_nbs, pos_obj);
@@ -121,35 +130,3 @@ void    push_swap_algo(t_stack *stack_a, t_stack *stack_b, int *arr_asc, t_unmar
         i++;
     }
 }
-
-// void    find_obj_by_sqrt(t_stack *stack_a, int *arr_asc, t_unmarked *unmarked_nbs, int index)
-// {
-//     int *pos_obj;
-//     int i;
-//     int sqrt;
-//     t_index times;
-//     t_obj shortest;
-
-//     sqrt = find_sqrt(stack_a->size);
-//     pos_obj = malloc(sizeof(int) * sqrt);
-//     if (!pos_obj)
-//         return ;
-//     ft_bzero(pos_obj, sqrt);
-//     i = index * sqrt;
-//     times.start = index * sqrt;
-//     times.end = index * sqrt + sqrt;
-//     printf("%d - %d\n", times.start, times.end);
-//     while (i < index * sqrt + sqrt)
-//     {
-//         find_obj_node_pos(stack_a, arr_asc, times, pos_obj);
-//         shortest = find_shorter_path_rotate(arr_asc, unmarked_nbs, pos_obj, times);
-//         printf("shortest.path is %d and obj.value is %d\n", shortest.path, shortest.value);
-//         if (shortest.path == -1)
-//             continue ;
-//         rotate_shortest_to_top(stack_a, &shortest);
-//         i++;
-//     }
-// }
-// printf("\n-----------------------------------------------\n");
-// printf("[%d] sqrt: ", i);
-// find_obj_by_sqrt(stack_a, arr_asc, unmarked_nbs, i);
