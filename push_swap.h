@@ -36,6 +36,13 @@ typedef struct s_unmarked
     int unmarked_size;
 }              t_unmarked;
 
+typedef struct s_move {
+    int val;
+    int a_rot;
+    int b_rot;
+    int total_cost;
+}               t_move;
+
 void    print_arr(int *arr, int size);
 void    ft_print_stack(t_stack *stack);
 int     ft_strlen(char *str);
@@ -71,7 +78,7 @@ void    sort_two(t_stack *stack);
 void    sort_three(t_stack *stack);
 int     find_mins_pos_in_simple(t_stack *stack_a, int num);
 int     find_shortest_from_mins(int *mins_path, int size);
-void    get_arr_min_check_rotate_push(t_stack *stack_a, t_stack *stack_b, int *arr);
+void    get_arr_min_check_rotate_push(t_stack *stack_a, t_stack *stack_b, int *arr, int *mins_path);
 void    easy_push_swap(t_stack *stack_a, t_stack *stack_b);
 void    push_swap(t_stack *stack_a, t_stack *stack_b);
 int     *creat_array_from_stack(t_stack *stack_a, int *arr);
@@ -85,14 +92,16 @@ int     get_bottom_val(t_stack *stack);
 int     is_obj_unmarked(t_unmarked *unmarked_nbs, int val);
 void    swap_rotate(t_stack *stack_a, t_stack *stack_b, t_obj *shortest, int real_pos);
 void    swap_rotate_shortest_to_top(t_stack *stack_a, t_stack *stack_b, t_obj *shortest);
-//void    remove_unmarked_value(t_unmarked *unmarked_nbs, int val);
 void    push_swap_algo(t_stack *stack_a, t_stack *stack_b, int *arr_asc, t_unmarked *unmarked_nbs);
 void    find_obj_node_pos(t_stack *stack_a, int *arr_asc, t_index times, t_unmarked *unmarked_nbs, int *pos_obj);
 t_obj   find_shorter_path_rotate(int *arr_asc, t_unmarked *unmarked_nbs, int *pos_obj, t_index times);
 void    push_swap_for_lasts_unmarked(t_stack *stack_a, t_stack *stack_b, t_unmarked *unmarked_nbs);
-int     *get_val_in_b(t_stack *stack_a, t_stack *stack_b);
-int     find_pos_in_b(t_stack *stack_b, int pos);
 int     find_val_insert_place(t_stack *stack_a, int val);
 int     solve_two_exp_case(t_stack *stack_a, int val);
 void    push_swap_back(t_stack *stack_a, t_stack *stack_b, t_unmarked *unmarked_nbs);
+int     get_index(t_stack *stack, int val);
+int     ft_max(int a, int b);
+int     ft_abs(int nb);
+int     calc_rot_cost(int size, int index);
+
 #endif

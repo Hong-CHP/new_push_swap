@@ -50,46 +50,63 @@ int find_shortest_from_mins(int *mins_path, int size)
     return (min_index);
 }
 
-void    simple_rotate(t_stack *stack_a, int val)
+void    simple_rotate(t_stack *stack_a, t_stack *stack_b, int val)
 {
     int real_pos;
-    int pos;
-    t_node *cur;
 
-    pos = 1;
-    cur = stack_a->top;
-    while (cur)
-    {
-        if (val == *(cur->value))
-            real_pos = pos;
-        pos++;
-        cur = cur->next;
-    }
+    real_pos = get_real_pos(stack_a, val);
     if (real_pos <= (stack_a->size + 1)/ 2)
     {
         while (*(stack_a->top->value) != val)
-            ra(stack_a);
+        {
+            if (stack_b->size > 2 
+                && *(stack_b->top->value) < *(stack_b->top->next->value) 
+                && *(stack_b->top->value) < *(stack_b->top->next->next->value))
+                rr(stack_a, stack_b);
+            else
+                ra(stack_a);
+        }
     }
     else
         while (*(stack_a->top->value) != val)
-            rra(stack_a);
+        {
+            if (stack_b->size > 2 
+                && *(stack_b->top->value) < *(stack_b->top->next->value) 
+                && *(stack_b->top->value) < *(stack_b->top->next->next->value))
+                rrr(stack_a, stack_b);
+            else
+                rra(stack_a);
+        }
 }
 
-void    check_before(t_stack *stack_a, t_stack *stack_b)
+void    check_before(t_stack *stack_a, t_stack *stack_b, int val)
 {
-    if (*(stack_a->top->value) > *(stack_a->top->next->value))
-        sa(stack_a);
-    if (stack_b->size >= 2
-        && *(stack_b->top->value) < *(stack_b->top->next->value))
+    int real_pos;
+
+    real_pos = get_real_pos(stack_a, val);
+    if (real_pos == 2)
+    {
+        if (stack_b->size >= 2
+            && *(stack_b->top->value) < *(stack_b->top->next->value))
+        ss(stack_a, stack_b);
+    }
+    else if (stack_b->size == 2
+            && *(stack_b->top->value) < *(stack_b->top->next->value))
         sb(stack_b);
+    else if (stack_b->size > 2
+            && *(stack_b->top->value) < *(stack_b->top->next->value)
+            && *(stack_b->top->value) > *(stack_b->top->next->next->value))
+        sb(stack_b);
+    else if (stack_b->size > 2 
+            && *(stack_b->top->value) < *(stack_b->top->next->value) 
+            && *(stack_b->top->value) < *(stack_b->top->next->next->value))
+        rb(stack_b);
 }
 
-void    get_arr_min_check_rotate_push(t_stack *stack_a, t_stack *stack_b, int *arr)
+void    get_arr_min_check_rotate_push(t_stack *stack_a, t_stack *stack_b, int *arr, int *mins_path)
 {
     int i;
-    int feet;
     int min_index;
-    int mins_path[stack_a->size];
 
     while (stack_a->size > 3)
     {
@@ -98,17 +115,16 @@ void    get_arr_min_check_rotate_push(t_stack *stack_a, t_stack *stack_b, int *a
         {
             arr = creat_array_from_stack(stack_a, arr);
             get_sort_arr(stack_a->size, arr);
-            feet = find_mins_pos_in_simple(stack_a, arr[i]);
-            mins_path[i] = feet;
+            mins_path[i] = find_mins_pos_in_simple(stack_a, arr[i]);
             i++;
         }
         if (i >= 2)
             min_index = find_shortest_from_mins(mins_path, i);
         else
             min_index = 0;
-        check_before(stack_a, stack_b);
-        simple_rotate(stack_a, arr[min_index]);
+        check_before(stack_a, stack_b, arr[min_index]);
+        simple_rotate(stack_a, stack_b, arr[min_index]);
         pb(stack_a, stack_b);
-        check_before(stack_a, stack_b);
+        check_before(stack_a, stack_b, arr[min_index]);
     }
 }

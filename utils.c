@@ -1,16 +1,5 @@
 #include "push_swap.h"
 
-void    print_arr(int *arr, int size)
-{
-    int i = 0;
-    while (i < size)
-    {
-        printf("%d, ", arr[i]);
-        i++;
-    }
-    printf("\n");
-}
-
 int	ft_strlen(char *str)
 {
 	int	len;
@@ -93,4 +82,15 @@ int ft_atoi(char *str)
 		i++;
 	}
 	return (nb * flag);
+}
+
+void    print_arr(int *arr, int size)
+{
+    int i = 0;
+    while (i < size)
+    {
+        printf("%d, ", arr[i]);
+        i++;
+    }
+    printf("\n");
 }
